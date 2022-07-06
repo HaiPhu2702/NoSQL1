@@ -1,8 +1,13 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const router = (0, express_1.Router)();
 const user_model_1 = require("../schemas/user.model");
+const multer_1 = __importDefault(require("multer"));
+const upload = (0, multer_1.default)();
 router.get('/list', async (req, res) => {
     try {
         const listUser = await user_model_1.User.find();
@@ -14,6 +19,7 @@ router.get('/list', async (req, res) => {
 });
 router.get('/delete/:id', async (req, res) => {
     try {
+        console.log(req.params.id);
         const findUser = await user_model_1.User.findOne({ _id: req.params.id });
         if (findUser) {
             await findUser.remove();
@@ -40,9 +46,9 @@ router.post('/create', async (req, res) => {
         res.render('error');
     }
 });
-router.get('/update/:id', (req, res) => {
+router.get('/update/:id', async (req, res) => {
     try {
-        const findUser = user_model_1.User.findOne({ _id: req.params.id });
+        const findUser = await user_model_1.User.findOne({ _id: req.params.id });
         if (findUser) {
             res.render("updateUser.ejs", { user: findUser });
         }
@@ -57,7 +63,8 @@ router.get('/update/:id', (req, res) => {
 router.post('/update', async (req, res) => {
     try {
         console.log(req.body.id);
-        const findUserUpdate = await user_model_1.User.findOne({ _id: `ObjectId("${req.body.id}")` });
+        const findUserUpdate = await user_model_1.User.findOne({ _id: req.body.id });
+        console.log(findUserUpdate);
         if (findUserUpdate) {
             findUserUpdate.name = req.body.name;
             findUserUpdate.code = req.body.code;

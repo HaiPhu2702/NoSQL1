@@ -14,7 +14,7 @@
 
  const update = (id) => {
 
- window.open('http://localhost:3000/book/update/' + id);
+ window.open('http://localhost:8080/book/update/' + id);
 
  };
 
@@ -22,7 +22,7 @@
 
  await $.ajax({
 
- url: `http://localhost:3000/book/delete/${id}`,
+ url: `http://localhost:8080/book/delete/${id}`,
 
  type: "DELETE",
 

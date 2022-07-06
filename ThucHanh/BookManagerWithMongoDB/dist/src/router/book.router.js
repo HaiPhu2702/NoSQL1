@@ -72,7 +72,7 @@ router.get('/list', async (req, res) => {
         res.render('error');
     }
 });
-router.delete('/delete/:id', async (req, res) => {
+router.get('/delete/:id', async (req, res) => {
     try {
         const findBook = await book_model_1.Book.findOne({ _id: req.params.id });
         if (findBook) {

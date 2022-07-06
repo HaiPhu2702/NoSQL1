@@ -1,11 +1,23 @@
-<form action="/user/update" method="post">
-   Name: <input type="text" name="name">
+
+
+
+    <form action="/user/update" method="POST">
+    <input type="hidden" name="id" value="<%=user.id %>">
+
+    Name: <input type="text" name="name" value="<%=user.name %>">
     </br>
-    code  :<input type="number" name="code" >
+    code  :<input type="number" name="code" value="<%=user.code%>">
     </br>
-    Email:<input type="text" name="email" id="email">
+    Email:<input type="text" name="email" id="email" value="<%=user.email%>">
     </br>
-    Phone<input type="text" name="phone" id="phone">
-        </br>
-    <button type="submit">update</button>
-</form>
+    Phone :<input type="text" name="phone" id="phone" value="<%=user.phone%>">
+    </br>
+    <button type="submit">Update</button>
+    </form>
+
+
+
+
+
+
+

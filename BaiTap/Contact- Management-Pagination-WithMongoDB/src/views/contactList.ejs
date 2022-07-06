@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>listUser</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        const update = (id) => {
+            window.open('http://localhost:8080/contact/update/' + id);
+        };
+        const deleteBook = async (id) => {
+            await $.ajax({
+                url: `http://localhost:8080/contact/delete/${id}`,
+                type: "GET",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(xhr.status);
+                    console.log(thrownError);
+                }
+            });
+            location.reload();
+        };
+
+    </script>
+</head>
+<body>
+
+<% listContact.forEach((contact, index)=>{ %>
+<h1>Name :<%= contact.name %></h1>
+<h2>Address :<%= contact.address %></h2>
+<h3>email :<%= contact.email %> </h3>
+<h4>phone :<%= contact.phone %></h4>
+<button onclick="update('<%= contact.id %>')">Update</button>
+<button><a href="/contact/delete/<%= contact.id %>">Delete</a></button>
+<% }) %>
+
+</body>
+</html>
+

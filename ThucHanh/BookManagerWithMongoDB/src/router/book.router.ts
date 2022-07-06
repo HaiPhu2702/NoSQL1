@@ -13,6 +13,7 @@ router.get('/create', (req, res) => {
 router.post('/create', upload.none(), async (req, res) => {
     try {
         const newBook = new Book(req.body)
+
         const book = await newBook.save();
         if (book) {
             res.render('success')
@@ -22,11 +23,11 @@ router.post('/create', upload.none(), async (req, res) => {
     } catch (e) {
         res.render('error')
     }
-
 })
 
 router.get('/update/:id', async (req, res) => {
     try{
+
         const findBook=await Book.findOne({_id: req.params.id})
         if(findBook){
             res.render('updateBook',{book:findBook})
